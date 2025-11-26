@@ -39,9 +39,13 @@ Developer → GitHub → GitHub Actions CI/CD → Docker Image → AWS ECR
 #### Tech Stack:
 
 Backend: FastAPI, Python, SQLAlchemy
+
 Database: PostgreSQL, AWS RDS
+
 DevOps / Cloud: Docker, Docker Compose, GitHub Actions, AWS ECR, AWS ECS (Fargate), IAM, CloudWatch
+
 Testing: Pytest, Postman/Newman
+
 CI/CD: Automated test → build → ECR push → ECS deploy
 
 ---
