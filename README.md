@@ -23,7 +23,7 @@ Cloud monitoring via CloudWatch
 
 ---
 #### Architecture:
-
+```
 Developer → GitHub → GitHub Actions CI/CD → Docker Image → AWS ECR
                                                            ↓
                                                       AWS ECS Fargate
@@ -33,6 +33,7 @@ Developer → GitHub → GitHub Actions CI/CD → Docker Image → AWS ECR
                                                    PostgreSQL (RDS)
                                                            ↓
                                                 Monitoring via CloudWatc
+```
                                                 
 ---
 #### Tech Stack:
@@ -45,6 +46,7 @@ CI/CD: Automated test → build → ECR push → ECS deploy
 
 ---
 #### Project Structure:
+```
 devops-project/
 │
 ├── app/
@@ -67,6 +69,22 @@ devops-project/
 │    └── workflows/
 │        └── ci-cd.yml
 └── README.md
+```
+---
 
+### Local Setup:
+```bash
+cp .env.example .env
+docker-compose up --build
+```
+API available at: http://localhost:8000
+#### Testing:
+```bash
+pytest -q
+```
 
+Run API tests via Postman or Newman:
+```bash
+newman run postman_collection.json
+```
                                                 
