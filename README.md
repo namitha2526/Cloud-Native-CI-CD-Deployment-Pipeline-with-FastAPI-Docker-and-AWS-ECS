@@ -101,15 +101,30 @@ Run API tests via Postman or Newman:
 newman run postman_collection.json
 ```
 ---
-#### AWS Deployment:
+#### IBM Deployment:
 
-The GitHub Actions pipeline automatically:
+Deploying to IBM Cloud (Free-tier friendly)
 
-1. Runs tests
-2. Builds Docker image
-3. Pushes to ECR
-4. Forces ECS service deployment
+Create free IBM Cloud account (no credit card required). 
+IBM
 
+Install IBM Cloud CLI + Code Engine plugin. 
+DEV Community
+```
+Log in: ibmcloud login → ibmcloud target -g Default
+
+Push Docker image to IBM Cloud Container Registry:
+
+ibmcloud cr login
+
+docker tag ... <region>.icr.io/<namespace>/<repo>:<tag>
+
+docker push <region>.icr.io/<namespace>/<repo>:<tag>
+```
+Deploy with Code Engine: in Console or CLI (ibmcloud ce app create ...) selecting your image. Code Engine will pull image from registry and run container automatically. 
+IBM Cloud
+
+Get public URL from Code Engine and access your API
 ---
 #### Required GitHub Secrets:
 ```
@@ -123,15 +138,11 @@ DATABASE_URL   (optional)
 ```
 #### Production Notes:
 
-Use AWS Secrets Manager for credentials
-
-Enable HTTPS through an Application Load Balancer
-
-Configure ECS autoscaling
-
-Use Alembic for DB migrations
-
----
+Use environment variables or IBM Cloud Secrets to manage sensitive data
+Avoid heavy usage that exceeds free container registry/storage limits (e.g. keep images < 500 MB) 
+IBM Cloud
+For persistence beyond container lifecycle, mount volumes or use managed databases (if you scale beyond free tier)
+Monitor logs and container health via IBM Cloud Logging / Monitoring
 #### Summary:
 
 This project demonstrates how to build, containerize, test, and deploy a backend API using modern DevOps workflows and cloud-native infrastructure. It reflects real-world engineering practices used in production environments.                                                
