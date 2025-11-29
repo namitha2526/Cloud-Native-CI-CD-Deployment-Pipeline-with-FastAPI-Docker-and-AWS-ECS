@@ -139,9 +139,11 @@ DATABASE_URL   (optional)
 #### Production Notes:
 
 Use environment variables or IBM Cloud Secrets to manage sensitive data
+
 Avoid heavy usage that exceeds free container registry/storage limits (e.g. keep images < 500 MB) 
-IBM Cloud
+
 For persistence beyond container lifecycle, mount volumes or use managed databases (if you scale beyond free tier)
+
 Monitor logs and container health via IBM Cloud Logging / Monitoring
 #### Summary:
 
