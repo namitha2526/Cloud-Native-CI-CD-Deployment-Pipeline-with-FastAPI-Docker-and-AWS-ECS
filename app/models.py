@@ -85,3 +85,11 @@ class Shipment(Base):
     status = Column(String, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+class Inventory(Base):
+    __tablename__ = "inventory"
+    id = Column(Integer, primary_key=True, index=True)
+    product_id = Column(Integer, nullable=False)
+    quantity_available = Column(Integer, nullable=False)
+    last_updated = Column(DateTime(timezone=True), onupdate=func.now(), server_default=func.now())
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
