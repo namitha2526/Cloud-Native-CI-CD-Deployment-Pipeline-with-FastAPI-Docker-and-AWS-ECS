@@ -76,3 +76,12 @@ class Payment(Base):
     status = Column(String, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
+class Shipment(Base):
+    __tablename__ = "shipments"
+    id = Column(Integer, primary_key=True, index=True)
+    order_id = Column(Integer, nullable=False)
+    shipment_date = Column(DateTime(timezone=True), nullable=False)
+    delivery_date = Column(DateTime(timezone=True), nullable=True)
+    status = Column(String, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now())
