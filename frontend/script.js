@@ -5,7 +5,7 @@ async function callBackend() {
     const res = await fetch("https://your-techie.onrender.com/");
     const data = await res.json();
 
-    // Example display (adjust if your API returns array)
+    // Example display (adjust if API returns array)
     container.innerHTML = `
       <div class="card">
         <h3>Backend Response</h3>
