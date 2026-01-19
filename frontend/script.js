@@ -2,7 +2,7 @@ const container = document.getElementById("roadmap-container");
 
 async function callBackend() {
   try {
-    const res = await fetch("https://YOUR-BACKEND.onrender.com/");
+    const res = await fetch("https://your-techie.onrender.com/");
     const data = await res.json();
 
     // Example display (adjust if your API returns array)
