@@ -6,12 +6,37 @@
 </head>
 <body>
 
-  <h1>🎓 Student Roadmap Platform</h1>
-  <p>Helping engineering students find clear learning paths.</p>
+ <!-- Navbar -->
+  <div class="navbar">
+    <h2>🎓 RoadmapHub</h2>
+    <div>
+      <a href="#">Home</a>
+      <a href="#">Roadmaps</a>
+      <a href="#">About</a>
+    </div>
+  </div>
 
-  <button onclick="callBackend()">Fetch Backend Data</button>
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1>Find Your Tech Roadmap</h1>
+    <p>Learn from students who already achieved what you're aiming for.</p>
+    <button onclick="callBackend()">Load Roadmaps</button>
+  </div>
 
-  <pre id="output"></pre>
+  <!-- Roadmaps Section -->
+  <div class="section">
+    <h2>📌 Featured Roadmaps</h2>
+    <div id="roadmap-container" class="cards"></div>
+  </div>
+
+  <!-- Submit Section -->
+  <div class="section">
+    <h2>✍️ Submit a Roadmap</h2>
+    <input type="text" id="name" placeholder="Your name">
+    <input type="text" id="title" placeholder="Roadmap title">
+    <textarea id="description" placeholder="Describe your roadmap..."></textarea>
+    <button onclick="addRoadmap()">Submit</button>
+  </div>
 
   <script src="script.js"></script>
 </body>
