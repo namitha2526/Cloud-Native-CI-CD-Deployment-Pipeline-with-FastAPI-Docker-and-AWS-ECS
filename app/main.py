@@ -4,8 +4,6 @@ from sqlalchemy.orm import Session
 from . import crud
 from . import models
 from . import schemas
-from . import intelligence
-response_model=schemas.AnalysisOutput
 from .database import engine, Base, get_db
 from .config import settings
 
@@ -38,55 +36,3 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
     if not u:
         raise HTTPException(status_code=404, detail="User not found")
     return u
-
-@app.post("/analyze", response_model=schemas.AnalysisOutput)
-def analyze(data: schemas.AnalysisInput):
-    tech_score = intelligence.calculate_technical_score(
-        data.repo_data.dict()
-    )
-
-    cognitive_profile = intelligence.calculate_cognitive_profile(
-        data.cognitive_test.dict()
-    )
-
-    recommendation = intelligence.generate_recommendation(
-        tech_score,
-        cognitive_profile["overall_cognitive_score"]
-    )
-
-    return {
-        "technical_score": tech_score,
-        "cognitive_profile": cognitive_profile,
-        "recommended_career_path": recommendation
-    }
-@app.post("/analyze/{user_id}")
-def analyze(user_id: int, data: schemas.AnalysisInput, db: Session = Depends(get_db)):
-    
-    tech_score = intelligence.calculate_technical_score(data.repo_data.dict())
-
-    cognitive_profile = intelligence.calculate_cognitive_profile(data.cognitive_test.dict())
-
-    recommendation = intelligence.generate_recommendation(
-        tech_score,
-        cognitive_profile["overall_cognitive_score"]
-    )
-
-    # Save to DB
-    crud.create_analysis(
-        db,
-        user_id,
-        tech_score,
-        cognitive_profile["overall_cognitive_score"],
-        recommendation
-    )
-
-    return {
-        "technical_score": tech_score,
-        "cognitive_profile": cognitive_profile,
-        "recommended_career_path": recommendation
-    }
-@app.get("/analysis/{user_id}")
-def get_analysis_history(user_id: int, db: Session = Depends(get_db)):
-    return crud.get_user_analyses(db, user_id)
-
-
