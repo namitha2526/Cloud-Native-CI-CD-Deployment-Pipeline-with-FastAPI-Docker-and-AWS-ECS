@@ -8,6 +8,6 @@ class Settings(BaseSettings):
     APP_PORT: int = 8000
 
     class Config:
-        env_file = ".env"
+        env_file = ".env.example"
 
 settings = Settings()
