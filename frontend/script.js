@@ -1,26 +1,40 @@
 const container = document.getElementById("roadmap-container")
 
-function callBackend(){
+async function callBackend() {
 
-const data = [
-{
-title:"AI Engineer Roadmap",
-description:"Learn Python, ML, Deep Learning, and deploy AI systems.",
-category:"AI/ML"
-},
+const container = document.getElementById("roadmap-container")
 
-{
-title:"Full Stack Developer",
-description:"Master HTML, CSS, JS, React, Node, and databases.",
-category:"Web Dev"
-},
+container.innerHTML = "<p>Loading...</p>"
 
-{
-title:"DevOps Engineer",
-description:"Learn Docker, Kubernetes, CI/CD pipelines and cloud.",
-category:"DevOps"
+try {
+
+const res = await fetch("http://127.0.0.1:8000/")
+const data = await res.json()
+
+container.innerHTML = ""
+
+const card = document.createElement("div")
+card.className = "card"
+
+card.innerHTML = `
+<h3>Backend Connected ✅</h3>
+<p>${data.message}</p>
+`
+
+container.appendChild(card)
+
+} catch (error) {
+
+container.innerHTML = `
+<div class="card">
+<h3 style="color:red;">Error ❌</h3>
+<p>${error}</p>
+</div>
+`
+
 }
-]
+
+}
 
 container.innerHTML=""
 
@@ -38,8 +52,6 @@ card.innerHTML=`
 container.appendChild(card)
 
 })
-
-}
 
 /* MODAL */
 
@@ -76,3 +88,4 @@ container.appendChild(card)
 closeModal()
 
 }
+
